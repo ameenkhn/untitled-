@@ -346,7 +346,7 @@ export const contactCards = [
     label: "Phone",
     value: "+91 98151 31355",
     href: "tel:+919815131355",
-    description: "Mon-Sat, Morning 10am-2pm | Evening 4pm-7pm",
+    description: "Mon-Sat, Morning: 10 AM-2 PM | Evening: 4 PM-7 PM",
   },
   {
     icon: "mail",
@@ -364,11 +364,11 @@ export const contactCards = [
   {
     icon: "clock",
     label: "Working Hours",
-    value: "Mon - Sat: Morning 10am to 2pm",
-    description: "Evening: 4pm to 7pm • Sunday by appointment only",
+    value: "Mon - Sat",
+    description: "Morning: 10 AM to 2 PM • Evening: 4 PM to 7 PM • Sunday by appointment only",
   },
   {
-    icon: "phone",
+    icon: "android",
     label: "Android App",
     value: "Download on Google Play",
     href: "https://play.google.com/store/apps/details?id=com.exly.kakkarclinic&hl=en_IN",

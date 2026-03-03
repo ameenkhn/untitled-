@@ -227,6 +227,20 @@ const icons = {
     </svg>
   `,
 
+  android: `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round" class="icon">
+      <path d="M8 9h8a2 2 0 0 1 2 2v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6a2 2 0 0 1 2-2z"></path>
+      <path d="M8 9a4 4 0 0 1 8 0"></path>
+      <line x1="10" y1="4" x2="8" y2="6"></line>
+      <line x1="14" y1="4" x2="16" y2="6"></line>
+      <circle cx="10" cy="12.5" r="0.8"></circle>
+      <circle cx="14" cy="12.5" r="0.8"></circle>
+      <line x1="5" y1="11" x2="5" y2="17"></line>
+      <line x1="19" y1="11" x2="19" y2="17"></line>
+    </svg>
+  `,
+
   mail: `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
       stroke-linecap="round" stroke-linejoin="round" class="icon">
@@ -471,7 +485,7 @@ export function buildHeader(currentPath = "") {
             <a href="tel:+919815131355" class="flex-1 px-3 py-2 rounded-lg border text-center hover:bg-muted transition">Call</a>
             <a href="${href("https://kakkarclinic.exlyapp.com/f6d9ac2e-c7d9-4742-acf4-8d07c4244ad4")}" class="flex-1 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-center hover:bg-primary/90 transition">Book</a>
           </div>
-          <a href="https://play.google.com/store/apps/details?id=com.exly.kakkarclinic&hl=en_IN" target="_blank" rel="noopener" class="mt-2 block px-3 py-2 rounded-lg border text-center hover:bg-muted transition">Download Android App</a>
+          <a href="https://play.google.com/store/apps/details?id=com.exly.kakkarclinic&hl=en_IN" target="_blank" rel="noopener" class="mt-2 flex items-center justify-center gap-2 px-3 py-2 rounded-lg border text-center hover:bg-muted transition">${icon("android")} Download Android App</a>
         </nav>
       </div>
     </header>
@@ -505,10 +519,10 @@ export function buildFooter() {
                 ${icon("map")} <span>Kakkar Clinic, Ram Aasre, 564, B-Block, Ranjit Avenue,<br />Amritsar, Punjab - 143001</span>
               </div>
               <div class="flex items-start gap-3 text-sm text-background/80">
-                ${icon("clock")} <span>Mon - Sat: Morning 10am to 2pm<br />Evening: 4pm to 7pm</span>
+                ${icon("clock")} <span>Mon - Sat<br />Morning: 10 AM to 2 PM<br />Evening: 4 PM to 7 PM<br />Sunday by appointment only</span>
               </div>
               <a href="https://play.google.com/store/apps/details?id=com.exly.kakkarclinic&hl=en_IN" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-background/80 hover:text-background transition-colors">
-                ${icon("phone")} Download Android App
+                ${icon("android")} Download Android App
               </a>
             </div>
           </div>

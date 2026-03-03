@@ -3575,6 +3575,141 @@ h6 {
 
 
 /* ============================================================
+   ANDROID APP POPUP
+   ============================================================ */
+
+.app-download-popup {
+  position: fixed;
+  top: 50%;
+  width: min(320px, calc(100vw - 2rem));
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1rem 0.9rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(140deg, #132936, #1d445b);
+  color: #ffffff;
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.26);
+  z-index: 45;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.42s ease, opacity 0.42s ease;
+}
+
+.app-download-popup--left {
+  left: 1rem;
+  transform: translate(-120%, -50%);
+}
+
+.app-download-popup--right {
+  right: 1rem;
+  transform: translate(120%, -50%);
+}
+
+.app-download-popup.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.app-download-popup--left.is-visible {
+  transform: translate(0, -50%);
+}
+
+.app-download-popup--right.is-visible {
+  transform: translate(0, -50%);
+}
+
+.app-download-popup__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.app-download-popup__close:hover {
+  color: #ffffff;
+}
+
+.app-download-popup__icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.app-download-popup__icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.app-download-popup__content {
+  padding-right: 1.3rem;
+}
+
+.app-download-popup__title {
+  margin: 0 0 0.2rem 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.app-download-popup__text {
+  margin: 0 0 0.7rem 0;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.app-download-popup__cta {
+  display: inline-block;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: #22a087;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app-download-popup__cta:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .app-download-popup,
+  .app-download-popup--left,
+  .app-download-popup--right {
+    top: auto;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    transform: translateY(140%);
+  }
+
+  .app-download-popup.is-visible,
+  .app-download-popup--left.is-visible,
+  .app-download-popup--right.is-visible {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-download-popup {
+    transition: opacity 0.2s ease;
+  }
+}
+
+
+/* ============================================================
    ACCORDION ANIMATIONS
    ============================================================ */
 

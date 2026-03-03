@@ -25,6 +25,7 @@ import {
 
 const qs = (sel, ctx = document) => ctx.querySelector(sel);
 const qsa = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+const ANDROID_APP_URL = "https://play.google.com/store/apps/details?id=com.exly.kakkarclinic&hl=en_IN";
 
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page || "home";
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAnimations();
   initBlogFilters();
   injectVideoModal();
+  initAndroidAppPopup();
 });
 
 /* ===================== CHROME ===================== */
@@ -295,6 +297,76 @@ function handleEscClose(e) {
   if (e.key === "Escape") {
     closeVideoModal();
   }
+}
+
+/* ===================== ANDROID APP POPUP ===================== */
+
+function initAndroidAppPopup() {
+  if (document.getElementById("androidAppPopup")) return;
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+    <aside id="androidAppPopup" class="app-download-popup app-download-popup--right" aria-live="polite" aria-label="Download Android app">
+      <button type="button" class="app-download-popup__close" data-app-popup-close aria-label="Dismiss app download popup">×</button>
+      <div class="app-download-popup__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 9h8a2 2 0 0 1 2 2v6a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3v-6a2 2 0 0 1 2-2z"></path>
+          <path d="M8 9a4 4 0 0 1 8 0"></path>
+          <line x1="10" y1="4" x2="8" y2="6"></line>
+          <line x1="14" y1="4" x2="16" y2="6"></line>
+          <circle cx="10" cy="12.5" r="0.8"></circle>
+          <circle cx="14" cy="12.5" r="0.8"></circle>
+          <line x1="5" y1="11" x2="5" y2="17"></line>
+          <line x1="19" y1="11" x2="19" y2="17"></line>
+        </svg>
+      </div>
+      <div class="app-download-popup__content">
+        <p class="app-download-popup__title">Download Android App</p>
+        <p class="app-download-popup__text">Book appointments faster with the Kakkar Clinic app.</p>
+        <a href="${ANDROID_APP_URL}" target="_blank" rel="noopener" class="app-download-popup__cta">Download Now</a>
+      </div>
+    </aside>
+    `
+  );
+
+  const popup = document.getElementById("androidAppPopup");
+  const close = qs("[data-app-popup-close]", popup);
+  let showOnLeft = false;
+  let hideTimer = null;
+
+  const hidePopup = () => {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+    popup.classList.remove("is-visible");
+  };
+
+  const showPopup = () => {
+    if (popup.classList.contains("is-visible")) return;
+    popup.classList.remove("app-download-popup--left", "app-download-popup--right");
+    popup.classList.add(showOnLeft ? "app-download-popup--left" : "app-download-popup--right");
+    requestAnimationFrame(() => popup.classList.add("is-visible"));
+    hideTimer = window.setTimeout(hidePopup, 9000);
+    showOnLeft = !showOnLeft;
+  };
+
+  close?.addEventListener("click", hidePopup);
+  popup.addEventListener("mouseenter", () => {
+    if (hideTimer) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  });
+  popup.addEventListener("mouseleave", () => {
+    if (popup.classList.contains("is-visible")) {
+      hideTimer = window.setTimeout(hidePopup, 4000);
+    }
+  });
+
+  window.setTimeout(showPopup, 6000);
+  window.setInterval(showPopup, 25000);
 }
 
 /* ===================== HEADER ===================== */
