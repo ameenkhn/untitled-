@@ -303,6 +303,11 @@ function handleEscClose(e) {
 
 function initAndroidAppPopup() {
   if (document.getElementById("androidAppPopup")) return;
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const firstDelayMs = isMobile ? 9000 : 6000;
+  const repeatDelayMs = isMobile ? 35000 : 25000;
+  const visibleDurationMs = isMobile ? 7000 : 9000;
+  const leaveDurationMs = isMobile ? 2500 : 4000;
 
   document.body.insertAdjacentHTML(
     "beforeend",
@@ -332,6 +337,7 @@ function initAndroidAppPopup() {
 
   const popup = document.getElementById("androidAppPopup");
   const close = qs("[data-app-popup-close]", popup);
+  if (isMobile) popup.classList.add("app-download-popup--mobile");
   let showOnLeft = false;
   let hideTimer = null;
 
@@ -348,25 +354,27 @@ function initAndroidAppPopup() {
     popup.classList.remove("app-download-popup--left", "app-download-popup--right");
     popup.classList.add(showOnLeft ? "app-download-popup--left" : "app-download-popup--right");
     requestAnimationFrame(() => popup.classList.add("is-visible"));
-    hideTimer = window.setTimeout(hidePopup, 9000);
+    hideTimer = window.setTimeout(hidePopup, visibleDurationMs);
     showOnLeft = !showOnLeft;
   };
 
   close?.addEventListener("click", hidePopup);
-  popup.addEventListener("mouseenter", () => {
-    if (hideTimer) {
-      clearTimeout(hideTimer);
-      hideTimer = null;
-    }
-  });
-  popup.addEventListener("mouseleave", () => {
-    if (popup.classList.contains("is-visible")) {
-      hideTimer = window.setTimeout(hidePopup, 4000);
-    }
-  });
+  if (!isMobile) {
+    popup.addEventListener("mouseenter", () => {
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    });
+    popup.addEventListener("mouseleave", () => {
+      if (popup.classList.contains("is-visible")) {
+        hideTimer = window.setTimeout(hidePopup, leaveDurationMs);
+      }
+    });
+  }
 
-  window.setTimeout(showPopup, 6000);
-  window.setInterval(showPopup, 25000);
+  window.setTimeout(showPopup, firstDelayMs);
+  window.setInterval(showPopup, repeatDelayMs);
 }
 
 /* ===================== HEADER ===================== */

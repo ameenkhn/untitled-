@@ -3689,16 +3689,66 @@ h6 {
   .app-download-popup--left,
   .app-download-popup--right {
     top: auto;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom));
     left: 0.75rem;
     right: 0.75rem;
     width: auto;
-    transform: translateY(140%);
+    transform: translateY(130%);
   }
 
   .app-download-popup.is-visible,
   .app-download-popup--left.is-visible,
   .app-download-popup--right.is-visible {
     transform: translateY(0);
+  }
+
+  .app-download-popup--mobile {
+    gap: 0.6rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.9rem;
+  }
+
+  .app-download-popup--mobile .app-download-popup__icon {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .app-download-popup--mobile .app-download-popup__icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .app-download-popup--mobile .app-download-popup__content {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding-right: 1.35rem;
+    width: 100%;
+  }
+
+  .app-download-popup--mobile .app-download-popup__title {
+    margin: 0;
+    font-size: 0.86rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .app-download-popup--mobile .app-download-popup__text {
+    display: none;
+  }
+
+  .app-download-popup--mobile .app-download-popup__cta {
+    margin-left: auto;
+    padding: 0.38rem 0.65rem;
+    font-size: 0.74rem;
+    white-space: nowrap;
+  }
+
+  .app-download-popup--mobile .app-download-popup__close {
+    top: 0.4rem;
+    right: 0.45rem;
+    font-size: 1.1rem;
   }
 }
 
